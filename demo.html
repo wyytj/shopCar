@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			/**{
+				padding: 0;
+				margin: 0;
+			}
+				#bg{
+					background: url(img/bg.jpg)  no-repeat;
+					background-size: cover;
+					width: 100%;
+					height: 100%;
+					position: fixed;
+				}
+				img {
+					width: 18px;
+					height: 18px;
+					position: absolute;
+					
+				}*/
+				*{margin:0;padding:0}
+				#bg{
+					width:100%;
+					height:100%;
+					background:url(img/bg.jpg) no-repeat;
+					background-size: cover;
+					position: fixed
+				}
+				img{
+					width:18px;
+					height: 18px;
+					position: absolute;
+				}
+		</style>
+	</head>
+	<body>
+		<div id="bg">
+			
+		</div>
+	</body>
+</html>
+<script src="public.js"></script>
+<script src="sport5.js"></script>
+<script>
+	/*
+	确定构造函数 ： FireFly
+	确定属性 ：  动态创建的每一个img
+	确定功能 ：  init 动态创建     运动  
+	 */
+	window.onload = function(){
+		var count = rand(30,80);
+		for(var i = 0; i < count; i++){
+			new FireFly().init();
+		}
+		
+	}
+	
+	function FireFly(){
+		this.star = document.createElement("img");
+		this.init = function(){
+			this.star.src = "img/1.jpg";
+			this.star.style.left = rand(0,window.innerWidth - this.star.offsetWidth) + "px";
+			this.star.style.top = rand(0,window.innerHeight - this.star.offsetHeight) + "px";
+			document.body.appendChild(this.star);
+			setInterval(function(){//定时器中的this是window,用bind去改变里面的this，变为实例
+				this.fly();
+			}.bind(this),1000)
+		}
+		this.fly = function(){
+			move(this.star,{
+				"left" : rand(0,window.innerWidth - this.star.offsetWidth),
+				"top" : rand(0,window.innerHeight - this.star.offsetHeight)
+			});
+		}
+	}
+	
+	
+	
+	/*var res = new FireFly();
+	res.init()*/
+	
+	
+</script>
